@@ -1,68 +1,49 @@
-const { chromium } = require('playwright');
-const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args));
-const fs = require("fs")
 const FileManager = require("./src/scripts/FileManager");
+const WebSocket = require("./src/scripts/WebSocket")
+const { chromium } = require('playwright');
 
+// Sim precisa ser instanciado aqui
+const wb = new WebSocket();
 
-// TODO: Refatorar e modularizar
 (async () => {
   try {
-
-    // Pega o WebSocket da instância Chromium aberta
-    const res = await fetch('http://127.0.0.1:9222/json/version');
-    const data = await res.json();
-    const wsUrl = data.webSocketDebuggerUrl;
-    console.log('Conectando a:', wsUrl);
-
-    // Conecta ao Chromium já aberto
-    const browser = await chromium.connectOverCDP(wsUrl);
-
-    // Lista os contextos disponíveis
+    const webSocketUrl = await wb.getUrl()
+    const browser = await chromium.connectOverCDP(webSocketUrl);
     const contexts = browser.contexts();
-    console.log(`Contextos encontrados: ${contexts.length}`);
-
-    if (contexts.length === 0) {
-      console.error('Nenhum contexto encontrado.');
-      return;
-    }
-
-    // Usa a primeira aba existente
     const pages = contexts[0].pages();
-    console.log(`Páginas encontradas: ${pages.length}`);
-
-    if (pages.length === 0) {
-      console.error('Nenhuma aba/página aberta foi encontrada.');
-      return;
-    }
-
     const page = pages[0];
+    const userName = await page.textContent('span.x1lliihq.x193iq5w.x6ikm8r.x10wlt62.xlyipyv.xuxw1ft')
 
-    let userName = await page.textContent('span.x1lliihq.x193iq5w.x6ikm8r.x10wlt62.xlyipyv.xuxw1ft')
     const fileManager = new FileManager(userName)
 
+    console.log("---- PASSO A PASSO ----")
+    console.log("  1. Aperte nos seguidores")
+    console.log("  2. Scrole até o ultimo seguidor")
+    console.log("  3. Volte aqui e aperte Ctrl+c para parar o script")
+    console.log("---- LOGS ----")
+
+    // Modifica requisição aumentando o numero de seguidores retornados
     await page.route('**/api/v1/friendships/**/followers/**', async (route, request) => {
       const originalUrl = request.url();
+      const newUrl = new URL(originalUrl);
 
       // Modifica o parâmetro `count` de 12 para 50
-      const newUrl = new URL(originalUrl);
       newUrl.searchParams.set('count', '50');
 
-      //console.log('Headers da requisição:', request.headers());
       // Reenvia a requisição com a URL modificada
       await route.continue({ url: newUrl.toString() });
     });
 
+    // Espera resposta da requisição e concatena tudo em um json na pasta logs
     page.on('response', async response => {
       if (response.url().includes('/followers/')) {
-        console.log('Resposta capturada:', response.url());
-        const headers = response.headers();
-        //console.log('Headers:', headers);
-
         const data = await response.json();
-        fileManager.addUsers(data.users)
-      }
-    });   
 
+        // Concatena cada json dos users em um novo json
+        fileManager.addUsers(data.users)
+        console.log('Resposta capturada:', response.url());
+      }
+    });
   } catch (err) {
     console.error('Erro:', err);
   }
