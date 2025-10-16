@@ -1,3 +1,9 @@
+# data
+data/followers/*
+!data/followers/.gitkeep
+data/mutualFollowers/*
+!data/mutualFollowers/.gitkeep
+
 # Logs
 logs/*
 !logs/.gitkeep

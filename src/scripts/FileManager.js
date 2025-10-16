@@ -1,9 +1,10 @@
-import fs from "fs"
+import fs from "fs";
+import { promises as fsPromises } from "fs";
 
 export class FileManager {
   constructor(userName) {
     this.userName = userName
-    this.arquivePath = `./logs/${this.userName}.json`;
+    this.arquivePath = `./data/followers/${this.userName}.json`;
   }
 
   addUsers(newUsers) {
@@ -24,14 +25,17 @@ export class FileManager {
 
   getConcatenedJson(newUsers) {
     const currentContent = this.getCurrentContent();
-    let currentJson = this.getJsonAsObject(currentContent);
+    let currentJson = FileManager.getJsonAsObject(currentContent);
 
+    // TODO: Retirar duplicação de codigo
     // if is [{}, {}, {}]
-    if (this.isArray(currentJson)) {
+    if (FileManager.isArray(currentJson)) {
       return currentJson.concat(newUsers);
     }
+
+    // TODO: Retirar duplicação de codigo
     // if is { users: [{}, {}, {}]}
-    if (currentJson && this.isArray(currentJson.users)) {
+    if (currentJson && FileManager.isArray(currentJson.users)) {
       return currentJson.users.concat(newUsers);
     }
 
@@ -43,19 +47,43 @@ export class FileManager {
     return fs.readFileSync(this.arquivePath, 'utf8');
   }
 
-  getJsonAsObject(currentContent) {
+  static getJsonAsObject(json) {
       try {
-        return JSON.parse(currentContent);
+        return JSON.parse(json);
       } catch (e) {
         return { users: [] };
       }
   }
 
-  isArray(element) {
+  static isArray(element) {
     return Array.isArray(element) ? true : false
   }
 
   writeFile(json) {
     fs.writeFileSync(this.arquivePath, JSON.stringify(json, null, 2));
+  }
+
+  static getJsonContent(jsonPath) {
+    let json = this.getJsonAsObject(fs.readFileSync(jsonPath, 'utf8'));
+
+    // TODO: Retirar duplicação de codigo
+    if (this.isArray(json.users)) {
+      return json.users
+    }
+
+    // TODO: Retirar duplicação de codigo
+    if (this.isArray(json)) {
+      return json
+    }
+  }
+
+  static async getNameOfArquives(filePath) {
+    const arquives = await this.getListOfArquives(filePath)
+    const arquivesNames = arquives.map(arquive => arquive.slice(0, -5))
+    return arquivesNames;
+  }
+
+  static async getListOfArquives(filePath) {
+    return await fsPromises.readdir(filePath)
   }
 }

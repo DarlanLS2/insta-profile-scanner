@@ -1,5 +1,6 @@
 import { FileManager } from "./src/scripts/FileManager.js"
 import { WebSocket } from "./src/scripts/WebSocket.js";
+import { ConsoleManager } from "./src/scripts/ConsoleManager.js";
 import { chromium } from "playwright-core";
 
 // Sim precisa ser instanciado aqui
@@ -13,15 +14,10 @@ const wb = new WebSocket();
     const pages = contexts[0].pages();
     const page = pages[0];
     const userName = await page.textContent('span.x1lliihq.x193iq5w.x6ikm8r.x10wlt62.xlyipyv.xuxw1ft')
-
     const fileManager = new FileManager(userName)
 
-    console.log("---- PASSO A PASSO ----")
-    console.log("  1. Aperte nos seguidores")
-    console.log("  2. Scrole até o ultimo seguidor")
-    console.log("  3. Volte aqui e aperte Ctrl+c para parar o script")
-    console.log("---- LOGS ----")
-
+    ConsoleManager.printStepByStep()
+  
     // Modifica requisição aumentando o numero de seguidores retornados
     await page.route('**/api/v1/friendships/**/followers/**', async (route, request) => {
       const originalUrl = request.url();
@@ -34,6 +30,8 @@ const wb = new WebSocket();
       await route.continue({ url: newUrl.toString() });
     });
 
+    ConsoleManager.printLogsHeader()
+
     // Espera resposta da requisição e concatena tudo em um json na pasta logs
     page.on('response', async response => {
       if (response.url().includes('/followers/')) {
@@ -41,7 +39,7 @@ const wb = new WebSocket();
 
         // Concatena cada json dos users em um novo json
         fileManager.addUsers(data.users)
-        console.log('Resposta capturada:', response.url());
+        ConsoleManager.printCapturedResponse(response.url())
       }
     });
   } catch (err) {
