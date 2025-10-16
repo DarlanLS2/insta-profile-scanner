@@ -1,6 +1,6 @@
-const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args));
+import fetch from 'node-fetch'
 
-class WebSocket {
+export class WebSocket {
   constructor() {
     this.url = "http://127.0.0.1:9222/json/version"
   }
@@ -11,4 +11,3 @@ class WebSocket {
   }
 }
 
-module.exports = WebSocket

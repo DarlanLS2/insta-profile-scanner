@@ -1,6 +1,6 @@
-const fs = require("fs");
+import fs from "fs"
 
-class FileManager {
+export class FileManager {
   constructor(userName) {
     this.userName = userName
     this.arquivePath = `./logs/${this.userName}.json`;
@@ -59,5 +59,3 @@ class FileManager {
     fs.writeFileSync(this.arquivePath, JSON.stringify(json, null, 2));
   }
 }
-
-module.exports = FileManager;

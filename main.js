@@ -1,6 +1,6 @@
-const FileManager = require("./src/scripts/FileManager");
-const WebSocket = require("./src/scripts/WebSocket")
-const { chromium } = require('playwright');
+import { FileManager } from "./src/scripts/FileManager.js"
+import { WebSocket } from "./src/scripts/WebSocket.js";
+import { chromium } from "playwright-core";
 
 // Sim precisa ser instanciado aqui
 const wb = new WebSocket();
