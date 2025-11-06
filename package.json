@@ -1,0 +1,27 @@
+{
+  "name": "insta-profile-scanner",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "type": "module",
+  "dependencies": {
+    "node-fetch": "^3.3.2",
+    "playwright": "^1.56.0",
+    "playwright-core": "^1.56.0",
+    "undici-types": "^7.14.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DarlanLS2/insta-profile-scanner.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DarlanLS2/insta-profile-scanner/issues"
+  },
+  "homepage": "https://github.com/DarlanLS2/insta-profile-scanner#readme"
+}
