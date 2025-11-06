@@ -1,6 +1,6 @@
-import { FileManager } from "./src/scripts/FileManager.js"
-import { WebSocket } from "./src/scripts/WebSocket.js";
-import { ConsoleManager } from "./src/scripts/ConsoleManager.js";
+import { FileManager } from "./FileManager.js"
+import { WebSocket } from "./WebSocket.js";
+import { ConsoleManager } from "./ConsoleManager.js";
 import { chromium } from "playwright-core";
 
 // Sim precisa ser instanciado aqui

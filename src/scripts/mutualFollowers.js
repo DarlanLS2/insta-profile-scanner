@@ -1,10 +1,11 @@
-import { ConsoleManager } from "./src/scripts/ConsoleManager.js";
-import { FileManager } from "./src/scripts/FileManager.js";
+import { ConsoleManager } from "./ConsoleManager.js";
+import { FileManager } from "./FileManager.js";
 
 const consoleManager = new ConsoleManager();
 
 (async () => {
   const profileNames = await FileManager.getNameOfArquives("./data/followers")
+  console.log("profileNames")
 
   ConsoleManager.printProfilesOptions(profileNames);
 

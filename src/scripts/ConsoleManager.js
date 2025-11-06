@@ -11,14 +11,16 @@ export class ConsoleManager {
   }
 
   static printStepByStep() {
-    console.log("---- PASSO A PASSO ----")
-    console.log("  1. Aperte nos seguidores")
-    console.log("  2. Scrole até o ultimo seguidor")
-    console.log("  3. Volte aqui e aperte Ctrl+c para parar o script")
+    console.log("")
+    console.log(" ---- PASSO A PASSO ----")
+    console.log("   1. Aperte nos seguidores")
+    console.log("   2. Scrole até o ultimo seguidor")
+    console.log("   3. Volte aqui e aperte Ctrl+c para parar o script")
   }
 
   static printLogsHeader() {
-    console.log("---- LOGS ----")
+    console.log("")
+    console.log(" ---- LOGS ----")
   }
 
   static printCapturedResponse(response) {
@@ -28,6 +30,7 @@ export class ConsoleManager {
   static printProfilesOptions(profiles) {
     let count = 1
 
+    console.log("")
     console.log(` =========================================`);
     console.log(`            Seletor de Perfis           `);
     console.log(` =========================================`);
