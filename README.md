@@ -8,4 +8,27 @@ Este código é disponibilizado somente para fins educacionais e de aprendizado 
  - O autor não tem qualquer vínculo com o Instagram, Meta Platforms, Inc. ou empresas relacionadas.
  - O autor não se responsabiliza por danos, bloqueios de conta, ou violações legais decorrentes do uso indevido deste código.
  - O uso deste código em ambiente real é de inteira responsabilidade do usuário.
-  
+
+## Pré-requisitos: 
+- Node.js >= 20
+- npm
+- Chromium
+- Linux
+
+## Instalação: 
+``` bash
+git clone https://github.com/DarlanLS2/insta-profile-scanner
+cd insta-profile-scanner
+npm i
+```
+
+## Como usar: 
+``` bash
+chmod u+x ./main.sh
+./main.sh
+```
+
+### Como preparar o chromium: 
+``` bash
+chromium --remote-debugging-port=9222
+```
