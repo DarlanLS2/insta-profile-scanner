@@ -1,34 +1,34 @@
 # insta-profile-scanner
-Este projeto demonstra como capturar e processar respostas de rede do navegador localmente.
-O objetivo é mostrar habilidades técnicas em automação — não coletar dados reais do Instagram.
+This project demonstrates how to capture and process browser network responses locally.
+The goal is to showcase technical automation skills — not to collect real Instagram data.
 
-## Aviso Importante (Leia antes)
-Este código é disponibilizado somente para fins educacionais e de aprendizado técnico.
- - Não deve ser usado para scraping, automação de contas, coleta de dados de terceiros ou qualquer ação que viole os Termos de Serviço do Instagram ou da Meta.
- - O autor não tem qualquer vínculo com o Instagram, Meta Platforms, Inc. ou empresas relacionadas.
- - O autor não se responsabiliza por danos, bloqueios de conta, ou violações legais decorrentes do uso indevido deste código.
- - O uso deste código em ambiente real é de inteira responsabilidade do usuário.
+## Important Notice (Read before)
+This code is provided for educational and technical learning purposes only.
+ - Do not use it for scraping, account automation, collecting third-party data, or any action that violates Instagram or Meta's Terms of Service.
+ - The author has no affiliation with Instagram, Meta Platforms, Inc., or related companies.
+ - The author is not responsible for bans, account blocks, damages, or legal consequences resulting from misuse of this code.
+ - Using this code against real targets is the sole responsibility of the user.
 
-## Pré-requisitos: 
-- Node.js >= 20
-- npm
-- Chromium
-- Linux
+## Requirements
+ - Node.js >= 20
+ - npm
+ - Chromium
+ - Linux
 
-## Instalação: 
+## Installation: 
 ``` bash
 git clone https://github.com/DarlanLS2/insta-profile-scanner
 cd insta-profile-scanner
 npm i
 ```
 
-## Como usar: 
+## Usage: 
 ``` bash
 chmod u+x ./main.sh
 ./main.sh
 ```
 
-### Como preparar o chromium: 
+### How to start chromium: 
 ``` bash
 chromium --remote-debugging-port=9222
 ```
