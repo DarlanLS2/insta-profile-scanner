@@ -1,23 +1,11 @@
 # insta-profile-scanner
-## Passo a Passo para pegar os seguidores:
-1. Abra o chromium no debuggin mode: 
-```bash
-# Porta padrão: 9222
-chromium --remote-debugging-port=9222
-```
-2. Faça Login no seu instagram
-3. Abra o perfil da pessoa que você quer pegar os seguidores
-4. Rode na pasta do projeto: 
-```bash
-npm i
-node followerScaner.js
-```
-5. Com o script rodando, volte ao navegador, abra os seguidores e scrole até o ultimo seguidor.
+Este projeto demonstra como capturar e processar respostas de rede do navegador localmente.
+O objetivo é mostrar habilidades técnicas em automação — não coletar dados reais do Instagram.
 
-## Passo a Passo para pegar seguidores em comum entre dois perfis:
-1. Rode no terminal: 
-```bash
-node mutualFollowers.js
-```
-2. Escolha 2 perfis para comparar
-
+## Aviso Importante (Leia antes)
+Este código é disponibilizado somente para fins educacionais e de aprendizado técnico.
+ - Não deve ser usado para scraping, automação de contas, coleta de dados de terceiros ou qualquer ação que viole os Termos de Serviço do Instagram ou da Meta.
+ - O autor não tem qualquer vínculo com o Instagram, Meta Platforms, Inc. ou empresas relacionadas.
+ - O autor não se responsabiliza por danos, bloqueios de conta, ou violações legais decorrentes do uso indevido deste código.
+ - O uso deste código em ambiente real é de inteira responsabilidade do usuário.
+  
